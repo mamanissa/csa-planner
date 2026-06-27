@@ -140,7 +140,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 // === PLAN_DATA START ===
 const PLAN_DATA = {
   weekLabel: "Week of Jun 30 – Jul 5, 2026",
-  subtitle: "Flocktown Farms × Omaha Steaks",
   jonNote: "Jon away Tue–Thu night · Home Friday evening · Welcome home dinner Friday",
   csaInventory: "asian greens mix, baby fennel x2, cone cabbage, euro cucumbers x2, fresh garlic x2 heads, scallions x2 bunches, lacinato kale, orange carrots, red leaf lettuce, zucchini/squash x2, bigoli pasta 1lb, crushed tomatoes 28oz, coconut curry chickpeas 15oz, sardines in spiced olive oil",
   freezerInventory: [
@@ -371,7 +370,6 @@ function render() {
     <div class="header">
       <div class="header-text">
         <h1>${esc(PLAN_DATA.weekLabel)}</h1>
-        <p>${esc(PLAN_DATA.subtitle)}</p>
       </div>
       <button class="inv-btn" onclick="openInv()">&#10052; Freezer inventory</button>
     </div>`;
