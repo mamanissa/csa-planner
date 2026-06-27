@@ -8,23 +8,15 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8F6F1;color:#1a1a1a;min-height:100vh;padding:1.5rem 1rem 3rem}
 .planner{max-width:680px;margin:0 auto}
-
-/* header */
 .header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
 .header-text h1{font-size:22px;font-weight:600;color:#2D5016}
 .header-text p{font-size:13px;color:#666;margin-top:2px}
 .inv-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid #ccc;background:#fff;color:#444;cursor:pointer;white-space:nowrap}
 .inv-btn:hover{background:#f0ede8}
-
-/* jon banner */
 .jon-banner{background:#EAF3DE;border:1px solid #8FAF6E;border-radius:8px;padding:7px 12px;font-size:12px;color:#3B6D11;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
-
-/* legend */
 .legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1rem}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#888}
 .legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-
-/* cards */
 .cards{display:flex;flex-direction:column;gap:12px;margin-bottom:1.5rem}
 .card{background:#fff;border-radius:12px;border:1px solid #e5e1db;border-left:4px solid #ccc;padding:1rem 1.25rem;transition:opacity .2s}
 .card.cooked{opacity:.4}
@@ -32,10 +24,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .card.mid{border-left-color:#BA7517}
 .card.later{border-left-color:#3B6D11}
 .card.leftover{border-left-color:#185FA5}
-
 .day-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.06em}
 .meal-title{font-size:16px;font-weight:600;color:#1a1a1a;margin-top:3px;line-height:1.3}
-
 .badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:7px}
 .badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500}
 .badge-time{background:#EAF3DE;color:#3B6D11}
@@ -44,19 +34,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge-nocock{background:#FFF3CD;color:#856404}
 .badge-solo{background:#f2ede8;color:#888;border:1px solid #e0dbd4}
 .badge-couple{background:#EAF3DE;color:#3B6D11}
-
 .chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
 .chip{font-size:11px;padding:3px 9px;border-radius:20px;background:#f5f2ec;border:1px solid #e5e1db;color:#555}
-
 .card-note{font-size:12px;color:#999;margin-top:8px;font-style:italic;line-height:1.5}
-
-.recipe-links{margin-top:9px;display:flex;gap:10px;flex-wrap:wrap}
+.recipe-selector{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.recipe-option{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:5px 8px;border-radius:6px;border:1px solid transparent;transition:all .15s}
+.recipe-option:hover{background:#f5f2ec}
+.recipe-option.selected{background:#EAF3DE;border-color:#8FAF6E}
+.recipe-option.dimmed{opacity:.5}
+.recipe-option input[type=radio]{accent-color:#2D5016;cursor:pointer;flex-shrink:0}
+.recipe-option a{color:#C4873A;text-decoration:none;flex:1}
+.recipe-option a:hover{text-decoration:underline}
+.recipe-option .gap-tag{font-size:10px;color:#856404;background:#FFF3CD;padding:1px 6px;border-radius:10px;margin-left:4px;white-space:nowrap}
+.single-recipe{margin-top:9px}
 .recipe-link{font-size:12px;color:#C4873A;text-decoration:none}
 .recipe-link:hover{text-decoration:underline}
 .recipe-link::before{content:"→ "}
-
 .swap-result{margin-top:10px;padding:10px 12px;border-radius:8px;background:#E6F1FB;border:1px solid #b5d4f4;font-size:13px;color:#1a1a1a;line-height:1.6}
-
 .card-footer{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
 .serving-toggle{display:flex;border-radius:8px;border:1px solid #ccc;overflow:hidden}
 .serving-btn{font-size:11px;padding:4px 10px;background:none;border:none;cursor:pointer;color:#666}
@@ -66,14 +60,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .swap-btn:disabled{opacity:.5;cursor:default}
 .cook-check{display:flex;align-items:center;gap:5px;font-size:12px;color:#999;margin-left:auto;cursor:pointer;user-select:none}
 .cook-check input{cursor:pointer;accent-color:#2D5016}
-
-/* panels */
 .panel{border-radius:12px;border:1px solid #e5e1db;overflow:hidden;margin-bottom:12px}
 .panel-header{display:flex;justify-content:space-between;align-items:center;padding:12px 1.25rem;background:#f5f2ec;cursor:pointer;font-size:14px;font-weight:600;color:#2D5016;user-select:none}
 .panel-header:hover{background:#eee9e1}
 .panel-chev{font-size:16px;color:#999}
 .panel-body{padding:1rem 1.25rem;background:#fff;border-top:1px solid #e5e1db}
-
 .prep-section{margin-bottom:1rem}
 .prep-section:last-child{margin-bottom:0}
 .prep-section h3{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
@@ -81,12 +72,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .prep-item:last-child{border-bottom:none}
 .prep-dot{width:6px;height:6px;border-radius:50%;background:#ccc;margin-top:7px;flex-shrink:0}
 .prep-item strong{font-weight:600}
-
 .thaw-item{font-size:13px;color:#1a1a1a;padding:6px 0;border-bottom:1px solid #f0ede8;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .thaw-item:last-child{border-bottom:none}
 .thaw-pending{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#FFF3CD;color:#856404;white-space:nowrap}
 .thaw-done{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#EAF3DE;color:#3B6D11;white-space:nowrap}
-
 .shop-group{margin-bottom:1rem}
 .shop-group:last-of-type{margin-bottom:0}
 .shop-group h3{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
@@ -94,10 +83,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .shop-item:last-child{border-bottom:none}
 .shop-item input{cursor:pointer;accent-color:#2D5016;flex-shrink:0}
 .shop-item.checked{color:#aaa;text-decoration:line-through}
+.shop-item .shop-source{font-size:10px;color:#999;margin-left:auto;white-space:nowrap}
 .copy-btn{font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid #ccc;background:#f5f2ec;color:#555;cursor:pointer;margin-top:12px}
 .copy-btn:hover{background:#eee9e1}
-
-/* modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding-top:60px;z-index:100}
 .modal{background:#fff;border-radius:12px;border:1px solid #e5e1db;padding:1.25rem;width:90%;max-width:380px;max-height:80vh;overflow-y:auto}
 .modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
@@ -108,8 +96,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .inv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f0ede8;font-size:13px}
 .inv-row:last-child{border-bottom:none}
 .inv-qty{color:#999;font-size:12px}
-
-/* no data state */
 .no-data{text-align:center;padding:3rem 1rem;color:#aaa}
 .no-data h2{font-size:18px;font-weight:600;color:#2D5016;margin-bottom:8px}
 .no-data p{font-size:14px;line-height:1.6}
@@ -138,119 +124,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 // ============================================================
 
 // === PLAN_DATA START ===
-// === PLAN_DATA START ===
-const PLAN_DATA = {
-  weekLabel: "Week of Jun 30 – Jul 5, 2026",
-  subtitle: "Flocktown Farms × Omaha Steaks",
-  jonNote: "Jon away Tue–Thu night · Home Friday evening · Welcome home dinner Friday",
-  csaInventory: "asian greens mix, baby fennel x2, cone cabbage, euro cucumbers x2, fresh garlic x2 heads, scallions x2 bunches, lacinato kale, orange carrots, red leaf lettuce, zucchini/squash x2, bigoli pasta 1lb, crushed tomatoes 28oz, coconut curry chickpeas 15oz, sardines in spiced olive oil",
-  freezerInventory: [
-    { name: "Ground beef, 1 lb pkgs", qty: "3 remaining" },
-    { name: "Boneless pork chops, 5 oz", qty: "4 ct" },
-    { name: "Chicken thighs, 5 oz", qty: "4 ct (thawing for tex-mex)" },
-    { name: "Chicken breasts, 4 oz", qty: "4 ct" },
-    { name: "Salmon fillets, 6 oz", qty: "6 ct" },
-    { name: "Wild Argentinian red shrimp, 1 lb", qty: "1 pkg (skip — dislike)" }
-  ],
-  meals: [
-    {
-      day: "Tuesday", date: "Jul 1", urgency: "urgent", servings: 1,
-      title: "Sardine & tomato bigoli with wilted Asian greens",
-      cook: "25 min", protein: "Sardines (pantry)",
-      ingredients: ["sardines in spiced olive oil", "crushed tomatoes", "Asian greens mix", "fresh garlic", "scallions"],
-      note: "Batch cook — make enough sauce for Wednesday reheat. Asian greens go in the last 60 seconds.",
-      recipes: [
-  { label: "Sardine pasta with tomato — The Kitchn", url: "https://www.thekitchn.com/sardine-pasta-23102670" },
-  { label: "Tomato pasta with sardines & breadcrumbs — Inside the Rustic Kitchen", url: "https://www.insidetherustickitchen.com/tomato-pasta-sardines-and-breadcrumbs/" }
-]
-    },
-    {
-      day: "Wednesday", date: "Jul 2", urgency: "leftover", servings: 1,
-      title: "Leftover bigoli + cucumber & scallion salad",
-      cook: null, protein: "Leftover sardine sauce",
-      ingredients: ["leftover bigoli", "euro cucumber", "scallions", "red leaf lettuce"],
-      note: "Reheat pasta in a skillet with a splash of water. Prep night: trim fennel, store kale, slice cucumbers. Pull nothing from freezer tonight — Thu is vegetarian.",
-      recipes: []
-    },
-    {
-      day: "Thursday", date: "Jul 3", urgency: "mid", servings: 1,
-      title: "Coconut curry chickpea bowl with roasted zucchini & fennel",
-      cook: "30 min", protein: "Vegetarian",
-      ingredients: ["coconut curry chickpeas", "zucchini/squash", "baby fennel", "scallions", "carrots"],
-      note: "Pull 2 salmon fillets from freezer tonight before bed. Don't crowd the zucchini — cook in batches so it chars, not steams.",
-      recipes: [
-        { label: "Chickpea curry bowl — Cookie and Kate", url: "https://cookieandkate.com/chickpea-curry-recipe/" },
-        { label: "Roasted zucchini & fennel — Bon Appétit", url: "https://www.bonappetit.com/recipe/roasted-zucchini-with-fennel" }
-      ]
-    },
-    {
-      day: "Friday", date: "Jul 4", urgency: "later", servings: 2,
-      title: "Pan-seared salmon with garlicky kale & roasted carrots over bigoli",
-      cook: "35 min", protein: "Salmon fillets (×2)",
-      ingredients: ["salmon", "lacinato kale", "orange carrots", "fresh garlic", "bigoli pasta"],
-      note: "Jon's welcome-home dinner ✨ Pat salmon completely dry before searing — key to a golden crust. Marinate in garlic + olive oil + lemon zest all day if possible.",
-      recipes: [
-        { label: "Pan-seared salmon with crispy kale — Epicurious", url: "https://www.epicurious.com/recipes/food/views/pan-seared-salmon-with-crispy-kale" },
-        { label: "Salmon pasta with lemon — Food52", url: "https://food52.com/recipes/80619-salmon-pasta-with-lemon-and-capers" }
-      ]
-    },
-    {
-      day: "Saturday", date: "Jul 5", urgency: "later", servings: 2,
-      title: "CSA cleanup frittata with cone cabbage slaw",
-      cook: "30 min", protein: "Eggs",
-      ingredients: ["cone cabbage", "red leaf lettuce", "euro cucumber", "scallions", "fresh garlic", "any remaining veg"],
-      note: "Use whatever produce is left. A frittata is forgiving — sauté any lingering veg, pour eggs over, finish under the broiler. Cabbage makes a quick slaw on the side.",
-      recipes: [
-        { label: "How to make a frittata — Serious Eats", url: "https://www.seriouseats.com/frittata-recipe" },
-        { label: "Quick cabbage slaw — Cookie and Kate", url: "https://cookieandkate.com/easy-coleslaw-recipe/" }
-      ]
-    }
-  ],
-  prepTimeline: {
-    arrival: [
-      "Asian greens mix: spin dry, wrap in paper towel, bag it — use tonight, most perishable item in the box",
-      "Red leaf lettuce: store whole head loosely in a bag, unwashed — use within 3–4 days",
-      "Scallions: store dry and loosely wrapped in the fridge",
-      "Cucumbers: store whole and unwashed — once cut, use within 2 days",
-      "Zucchini/squash: store whole and unwashed — hold for Thursday",
-      "Baby fennel: trim fronds, store in a zip bag — good through Thursday",
-      "Carrots: peel and cut for snacking now, store in water-covered container all week",
-      "Cone cabbage: store whole and unwashed — once cut, wrap tightly, good through Saturday",
-      "Lacinato kale: store loosely in a bag, don't wash until Friday night",
-      "Break one garlic head open for tonight's pasta — store remainder at room temp"
-    ],
-    nightOf: {
-      "Tuesday": "Cook pasta 1 min shy of al dente — it finishes in the sauce. Add Asian greens right at the end. Make extra sauce for Wed.",
-      "Wednesday": "Reheat pasta in a skillet with a splash of water or broth. Slice cucumbers and scallions for the side salad.",
-      "Thursday": "Pull 2 salmon fillets from freezer before bed. Don't crowd zucchini in the pan — cook in batches.",
-      "Friday": "Pat salmon completely dry before searing. Kale goes in the same pan after — it loves the fond.",
-      "Saturday": "Assess what's left and build the frittata around it. Broil the last 3–4 minutes for a golden top."
-    },
-    thawSchedule: [
-      { protein: "Chicken thighs (for tex-mex)", instruction: "Thawing now for tonight/tomorrow", status: "done" },
-      { protein: "Kielbasa sausages (for Mon cabbage stir-fry)", instruction: "Thawing now for Monday", status: "done" },
-      { protein: "Salmon fillets (2 × 6 oz)", instruction: "Pull Thu night → cook Friday", status: "pending" }
-    ]
-  },
-  shoppingList: {
-    "Dairy & Eggs": [
-      "Parmesan or Pecorino Romano (for Tuesday pasta)",
-      "Eggs (6–8 count, for Saturday frittata)",
-      "Butter (if running low — for salmon)"
-    ],
-    "Pantry & Sauces": [
-      "Capers (optional — great in the sardine pasta)",
-      "Red pepper flakes (if low)",
-      "Good olive oil (pasta + salmon)",
-      "Rice (if not stocked — for Thursday chickpea bowl)",
-      "Lemons (1–2, for salmon pan sauce Friday)"
-    ],
-    "Bread & Snacks": [
-      "Crusty bread or baguette (for Tuesday pasta night)"
-    ]
-  }
-};
-// === PLAN_DATA END ===
+const PLAN_DATA = null;
 // === PLAN_DATA END ===
 
 // ============================================================
@@ -266,19 +140,56 @@ const lsSet = (k, v) => { try { localStorage.setItem(LS_PREFIX + weekKey() + '-'
 // ── state ─────────────────────────────────────────────────────────────────────
 let servings = [];
 let cooked = [];
-let shopChecked = [];
+let shopChecked = {};
 let swapResults = [];
+let selectedRecipes = [];
 
 function initState() {
   if (!PLAN_DATA) return;
   const n = PLAN_DATA.meals.length;
-  servings    = lsGet('servings')    || PLAN_DATA.meals.map(m => m.servings || 2);
-  cooked      = lsGet('cooked')      || Array(n).fill(false);
-  shopChecked = lsGet('shopChecked') || {};
-  swapResults = Array(n).fill(null);
-  // ensure arrays are right length (handles week transitions)
+  servings        = lsGet('servings')        || PLAN_DATA.meals.map(m => m.servings || 2);
+  cooked          = lsGet('cooked')          || Array(n).fill(false);
+  shopChecked     = lsGet('shopChecked')     || {};
+  selectedRecipes = lsGet('selectedRecipes') || Array(n).fill(0);
+  swapResults     = Array(n).fill(null);
   while (servings.length < n) servings.push(2);
   while (cooked.length < n)   cooked.push(false);
+  while (selectedRecipes.length < n) selectedRecipes.push(0);
+}
+
+// ── build merged shopping list ────────────────────────────────────────────────
+function getMergedShopList() {
+  const base = PLAN_DATA.baseShoppingList || PLAN_DATA.shoppingList || {};
+  const merged = {};
+
+  // start with base items
+  Object.entries(base).forEach(([cat, items]) => {
+    if (!items || !items.length) return;
+    if (!merged[cat]) merged[cat] = [];
+    items.forEach(item => {
+      merged[cat].push({ text: item, source: null });
+    });
+  });
+
+  // add gap ingredients from each meal's selected recipe
+  PLAN_DATA.meals.forEach((m, i) => {
+    const recipes = m.recipes || [];
+    const selIdx = selectedRecipes[i] || 0;
+    const recipe = recipes[selIdx];
+    if (!recipe || !recipe.gapIngredients || !recipe.gapIngredients.length) return;
+
+    const cat = 'Recipe-specific';
+    if (!merged[cat]) merged[cat] = [];
+    recipe.gapIngredients.forEach(item => {
+      // deduplicate
+      const existing = Object.values(merged).flat();
+      if (!existing.some(e => e.text.toLowerCase() === item.toLowerCase())) {
+        merged[cat].push({ text: item, source: m.day + ': ' + recipe.label.split(' — ')[0] });
+      }
+    });
+  });
+
+  return merged;
 }
 
 // ── render ────────────────────────────────────────────────────────────────────
@@ -336,9 +247,31 @@ function render() {
 
     const chips = (m.ingredients || []).map(x => `<div class="chip">${esc(x)}</div>`).join('');
 
-    const links = (m.recipes || []).map(r =>
-      `<a class="recipe-link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a>`
-    ).join('');
+    // recipe selection
+    const recipes = m.recipes || [];
+    const selIdx = selectedRecipes[i] || 0;
+    let recipeHTML = '';
+
+    if (recipes.length > 1) {
+      recipeHTML = `<div class="recipe-selector">`;
+      recipes.forEach((r, ri) => {
+        const isSel = ri === selIdx;
+        const gapCount = (r.gapIngredients || []).length;
+        const gapTag = gapCount > 0 ? `<span class="gap-tag">${gapCount} extra item${gapCount > 1 ? 's' : ''}</span>` : '';
+        recipeHTML += `
+          <label class="recipe-option${isSel ? ' selected' : ' dimmed'}" onclick="selRecipe(${i},${ri})">
+            <input type="radio" name="recipe-${i}" ${isSel ? 'checked' : ''}>
+            <a href="${esc(r.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(r.label)}</a>
+            ${gapTag}
+          </label>`;
+      });
+      recipeHTML += `</div>`;
+    } else if (recipes.length === 1) {
+      const r = recipes[0];
+      const gapCount = (r.gapIngredients || []).length;
+      const gapTag = gapCount > 0 ? `<span class="gap-tag" style="margin-left:6px">${gapCount} extra item${gapCount > 1 ? 's' : ''}</span>` : '';
+      recipeHTML = `<div class="single-recipe"><a class="recipe-link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a>${gapTag}</div>`;
+    }
 
     const swapHTML = swapResults[i]
       ? `<div class="swap-result">${esc(swapResults[i])}</div>` : '';
@@ -353,7 +286,7 @@ function render() {
         <div class="badges">${timeBadge}${protBadge}${srvBadge}</div>
         ${chips ? `<div class="chips">${chips}</div>` : ''}
         ${m.note ? `<div class="card-note">${esc(m.note)}</div>` : ''}
-        ${links ? `<div class="recipe-links">${links}</div>` : ''}
+        ${recipeHTML}
         ${swapHTML}
         <div class="card-footer">
           <div class="serving-toggle">
@@ -368,7 +301,7 @@ function render() {
       </div>`;
   });
 
-  html += `</div>`; // end .cards
+  html += `</div>`;
 
   // ── prep timeline panel ──
   const pt = PLAN_DATA.prepTimeline;
@@ -392,7 +325,7 @@ function render() {
       prepHTML += `<div class="prep-section"><h3>Thaw schedule</h3>`;
       pt.thawSchedule.forEach(t => {
         const badge = t.status === 'done'
-          ? `<span class="thaw-done">&#10003; ${esc(t.status === 'done' ? 'In fridge' : '')}</span>`
+          ? `<span class="thaw-done">&#10003; In fridge</span>`
           : `<span class="thaw-pending">${esc(t.instruction)}</span>`;
         prepHTML += `<div class="thaw-item"><span>${esc(t.protein)}</span>${badge}</div>`;
       });
@@ -411,27 +344,26 @@ function render() {
       </div>
     </div>`;
 
-  // ── shopping list panel ──
-  const sl = PLAN_DATA.shoppingList || {};
+  // ── dynamic shopping list panel ──
+  const merged = getMergedShopList();
   let shopHTML = '';
-  let allShopItems = [];
-  Object.entries(sl).forEach(([cat, items]) => {
+  let shopIdx = 0;
+  let allItems = [];
+
+  Object.entries(merged).forEach(([cat, items]) => {
     if (!items || !items.length) return;
     shopHTML += `<div class="shop-group"><h3>${esc(cat)}</h3>`;
     items.forEach(item => {
-      const idx = allShopItems.length;
+      const idx = shopIdx++;
       const checked = shopChecked[idx] || false;
+      const sourceTag = item.source ? `<span class="shop-source">${esc(item.source)}</span>` : '';
       shopHTML += `<label class="shop-item${checked?' checked':''}" id="si${idx}" onclick="togShop(${idx})">
-        <input type="checkbox" ${checked?'checked':''} onclick="event.stopPropagation();togShop(${idx})"> ${esc(item)}
+        <input type="checkbox" ${checked?'checked':''} onclick="event.stopPropagation();togShop(${idx})"> ${esc(item.text)}${sourceTag}
       </label>`;
-      allShopItems.push(item);
+      allItems.push(item.text + (item.source ? ' (' + item.source + ')' : ''));
     });
     shopHTML += `</div>`;
   });
-
-  const copyText = Object.entries(sl).map(([cat, items]) =>
-    items && items.length ? `${cat.toUpperCase()}\n${items.map(i=>`- ${i}`).join('\n')}` : ''
-  ).filter(Boolean).join('\n\n');
 
   html += `
     <div class="panel">
@@ -442,7 +374,7 @@ function render() {
       <div id="shopBody" style="display:none">
         <div class="panel-body">
           ${shopHTML || '<p style="font-size:13px;color:#aaa">No shopping gaps this week.</p>'}
-          <button class="copy-btn" onclick="copyShop(${JSON.stringify(copyText).replace(/</g,'&lt;')})">&#10064; Copy list</button>
+          <button class="copy-btn" onclick="copyShop()">&#10064; Copy list</button>
         </div>
       </div>
     </div>`;
@@ -463,10 +395,22 @@ function togCooked(i) {
   render();
 }
 
+function selRecipe(mealIdx, recipeIdx) {
+  selectedRecipes[mealIdx] = recipeIdx;
+  lsSet('selectedRecipes', selectedRecipes);
+  // reset shop checkboxes when recipe selection changes (list items shift)
+  shopChecked = {};
+  lsSet('shopChecked', shopChecked);
+  render();
+}
+
 function togShop(idx) {
   shopChecked[idx] = !shopChecked[idx];
   lsSet('shopChecked', shopChecked);
-  render();
+  const el = document.getElementById(`si${idx}`);
+  if (el) el.classList.toggle('checked');
+  const cb = el ? el.querySelector('input') : null;
+  if (cb) cb.checked = shopChecked[idx];
 }
 
 function togPanel(bodyId, chevId) {
@@ -501,7 +445,7 @@ async function doSwap(i) {
     const data = await res.json();
     swapResults[i] = data.content?.find(b => b.type === 'text')?.text || 'No suggestion returned.';
   } catch (e) {
-    swapResults[i] = 'Could not reach the API. Check your connection and try again.';
+    swapResults[i] = 'Could not reach the API. Check your connection.';
   }
   render();
 }
@@ -520,7 +464,12 @@ function closeInv() {
   document.getElementById('invModal').style.display = 'none';
 }
 
-function copyShop(text) {
+function copyShop() {
+  const merged = getMergedShopList();
+  const text = Object.entries(merged).map(([cat, items]) =>
+    items && items.length ? `${cat.toUpperCase()}\n${items.map(i => `- ${i.text}${i.source ? ' (' + i.source + ')' : ''}`).join('\n')}` : ''
+  ).filter(Boolean).join('\n\n');
+
   navigator.clipboard.writeText(text).then(() => {
     const btn = event.target.closest('button');
     const orig = btn.innerHTML;
