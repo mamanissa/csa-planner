@@ -138,7 +138,119 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 // ============================================================
 
 // === PLAN_DATA START ===
-const PLAN_DATA = null;
+// === PLAN_DATA START ===
+const PLAN_DATA = {
+  weekLabel: "Week of Jun 30 – Jul 5, 2026",
+  subtitle: "Flocktown Farms × Omaha Steaks",
+  jonNote: "Jon away Tue–Thu night · Home Friday evening · Welcome home dinner Friday",
+  csaInventory: "asian greens mix, baby fennel x2, cone cabbage, euro cucumbers x2, fresh garlic x2 heads, scallions x2 bunches, lacinato kale, orange carrots, red leaf lettuce, zucchini/squash x2, bigoli pasta 1lb, crushed tomatoes 28oz, coconut curry chickpeas 15oz, sardines in spiced olive oil",
+  freezerInventory: [
+    { name: "Ground beef, 1 lb pkgs", qty: "3 remaining" },
+    { name: "Boneless pork chops, 5 oz", qty: "4 ct" },
+    { name: "Chicken thighs, 5 oz", qty: "4 ct (thawing for tex-mex)" },
+    { name: "Chicken breasts, 4 oz", qty: "4 ct" },
+    { name: "Salmon fillets, 6 oz", qty: "6 ct" },
+    { name: "Wild Argentinian red shrimp, 1 lb", qty: "1 pkg (skip — dislike)" }
+  ],
+  meals: [
+    {
+      day: "Tuesday", date: "Jul 1", urgency: "urgent", servings: 1,
+      title: "Sardine & tomato bigoli with wilted Asian greens",
+      cook: "25 min", protein: "Sardines (pantry)",
+      ingredients: ["sardines in spiced olive oil", "crushed tomatoes", "Asian greens mix", "fresh garlic", "scallions"],
+      note: "Batch cook — make enough sauce for Wednesday reheat. Asian greens go in the last 60 seconds.",
+      recipes: [
+        { label: "Pasta con le sarde — Serious Eats", url: "https://www.seriouseats.com/pasta-with-sardines-recipe" },
+        { label: "Sardine pasta aglio e olio — NYT Cooking", url: "https://cooking.nytimes.com/recipes/1022657-pasta-with-sardines" }
+      ]
+    },
+    {
+      day: "Wednesday", date: "Jul 2", urgency: "leftover", servings: 1,
+      title: "Leftover bigoli + cucumber & scallion salad",
+      cook: null, protein: "Leftover sardine sauce",
+      ingredients: ["leftover bigoli", "euro cucumber", "scallions", "red leaf lettuce"],
+      note: "Reheat pasta in a skillet with a splash of water. Prep night: trim fennel, store kale, slice cucumbers. Pull nothing from freezer tonight — Thu is vegetarian.",
+      recipes: []
+    },
+    {
+      day: "Thursday", date: "Jul 3", urgency: "mid", servings: 1,
+      title: "Coconut curry chickpea bowl with roasted zucchini & fennel",
+      cook: "30 min", protein: "Vegetarian",
+      ingredients: ["coconut curry chickpeas", "zucchini/squash", "baby fennel", "scallions", "carrots"],
+      note: "Pull 2 salmon fillets from freezer tonight before bed. Don't crowd the zucchini — cook in batches so it chars, not steams.",
+      recipes: [
+        { label: "Chickpea curry bowl — Cookie and Kate", url: "https://cookieandkate.com/chickpea-curry-recipe/" },
+        { label: "Roasted zucchini & fennel — Bon Appétit", url: "https://www.bonappetit.com/recipe/roasted-zucchini-with-fennel" }
+      ]
+    },
+    {
+      day: "Friday", date: "Jul 4", urgency: "later", servings: 2,
+      title: "Pan-seared salmon with garlicky kale & roasted carrots over bigoli",
+      cook: "35 min", protein: "Salmon fillets (×2)",
+      ingredients: ["salmon", "lacinato kale", "orange carrots", "fresh garlic", "bigoli pasta"],
+      note: "Jon's welcome-home dinner ✨ Pat salmon completely dry before searing — key to a golden crust. Marinate in garlic + olive oil + lemon zest all day if possible.",
+      recipes: [
+        { label: "Pan-seared salmon with crispy kale — Epicurious", url: "https://www.epicurious.com/recipes/food/views/pan-seared-salmon-with-crispy-kale" },
+        { label: "Salmon pasta with lemon — Food52", url: "https://food52.com/recipes/80619-salmon-pasta-with-lemon-and-capers" }
+      ]
+    },
+    {
+      day: "Saturday", date: "Jul 5", urgency: "later", servings: 2,
+      title: "CSA cleanup frittata with cone cabbage slaw",
+      cook: "30 min", protein: "Eggs",
+      ingredients: ["cone cabbage", "red leaf lettuce", "euro cucumber", "scallions", "fresh garlic", "any remaining veg"],
+      note: "Use whatever produce is left. A frittata is forgiving — sauté any lingering veg, pour eggs over, finish under the broiler. Cabbage makes a quick slaw on the side.",
+      recipes: [
+        { label: "How to make a frittata — Serious Eats", url: "https://www.seriouseats.com/frittata-recipe" },
+        { label: "Quick cabbage slaw — Cookie and Kate", url: "https://cookieandkate.com/easy-coleslaw-recipe/" }
+      ]
+    }
+  ],
+  prepTimeline: {
+    arrival: [
+      "Asian greens mix: spin dry, wrap in paper towel, bag it — use tonight, most perishable item in the box",
+      "Red leaf lettuce: store whole head loosely in a bag, unwashed — use within 3–4 days",
+      "Scallions: store dry and loosely wrapped in the fridge",
+      "Cucumbers: store whole and unwashed — once cut, use within 2 days",
+      "Zucchini/squash: store whole and unwashed — hold for Thursday",
+      "Baby fennel: trim fronds, store in a zip bag — good through Thursday",
+      "Carrots: peel and cut for snacking now, store in water-covered container all week",
+      "Cone cabbage: store whole and unwashed — once cut, wrap tightly, good through Saturday",
+      "Lacinato kale: store loosely in a bag, don't wash until Friday night",
+      "Break one garlic head open for tonight's pasta — store remainder at room temp"
+    ],
+    nightOf: {
+      "Tuesday": "Cook pasta 1 min shy of al dente — it finishes in the sauce. Add Asian greens right at the end. Make extra sauce for Wed.",
+      "Wednesday": "Reheat pasta in a skillet with a splash of water or broth. Slice cucumbers and scallions for the side salad.",
+      "Thursday": "Pull 2 salmon fillets from freezer before bed. Don't crowd zucchini in the pan — cook in batches.",
+      "Friday": "Pat salmon completely dry before searing. Kale goes in the same pan after — it loves the fond.",
+      "Saturday": "Assess what's left and build the frittata around it. Broil the last 3–4 minutes for a golden top."
+    },
+    thawSchedule: [
+      { protein: "Chicken thighs (for tex-mex)", instruction: "Thawing now for tonight/tomorrow", status: "done" },
+      { protein: "Kielbasa sausages (for Mon cabbage stir-fry)", instruction: "Thawing now for Monday", status: "done" },
+      { protein: "Salmon fillets (2 × 6 oz)", instruction: "Pull Thu night → cook Friday", status: "pending" }
+    ]
+  },
+  shoppingList: {
+    "Dairy & Eggs": [
+      "Parmesan or Pecorino Romano (for Tuesday pasta)",
+      "Eggs (6–8 count, for Saturday frittata)",
+      "Butter (if running low — for salmon)"
+    ],
+    "Pantry & Sauces": [
+      "Capers (optional — great in the sardine pasta)",
+      "Red pepper flakes (if low)",
+      "Good olive oil (pasta + salmon)",
+      "Rice (if not stocked — for Thursday chickpea bowl)",
+      "Lemons (1–2, for salmon pan sauce Friday)"
+    ],
+    "Bread & Snacks": [
+      "Crusty bread or baguette (for Tuesday pasta night)"
+    ]
+  }
+};
+// === PLAN_DATA END ===
 // === PLAN_DATA END ===
 
 // ============================================================
