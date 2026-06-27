@@ -19,6 +19,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .inv-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid #e5e1db;background:#fff;color:#444;cursor:pointer;white-space:nowrap}
 .inv-btn:hover{background:#f0ede8}
 .jon-banner{background:#EAF3DE;border:1px solid #8FAF6E;border-radius:8px;padding:7px 12px;font-size:12px;color:#3B6D11;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+.progress-wrap{margin-bottom:1rem}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:#8FA3C2;margin-bottom:6px}
+.progress-track{height:8px;border-radius:6px;background:#1C2333;overflow:hidden}
+.progress-fill{height:100%;border-radius:6px;background:#F0B859;transition:width .3s ease}
 .legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1rem}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#8B96A8}
 .legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
@@ -375,6 +379,15 @@ function render() {
   if (PLAN_DATA.jonNote) {
     html += `<div class="jon-banner">&#9992; ${esc(PLAN_DATA.jonNote)}</div>`;
   }
+
+  const totalNights = PLAN_DATA.meals.length;
+  const cookedCount = PLAN_DATA.meals.reduce((n, m, i) => n + (cooked[i] ? 1 : 0), 0);
+  const pct = totalNights ? Math.round((cookedCount / totalNights) * 100) : 0;
+  html += `
+    <div class="progress-wrap">
+      <div class="progress-label"><span>${cookedCount} of ${totalNights} nights cooked</span><span>${pct}%</span></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    </div>`;
 
   html += `
     <div class="legend">
