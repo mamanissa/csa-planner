@@ -6,430 +6,503 @@
 <title>CSA Weekly Planner</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8F6F1;color:#1a1a1a;min-height:100vh;padding:1.5rem 1rem 3rem}
-.planner{max-width:680px;margin:0 auto}
-
-/* header */
-.header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
-.header-text h1{font-size:22px;font-weight:600;color:#2D5016}
-.header-text p{font-size:13px;color:#666;margin-top:2px}
-.inv-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid #ccc;background:#fff;color:#444;cursor:pointer;white-space:nowrap}
-.inv-btn:hover{background:#f0ede8}
-
-/* jon banner */
-.jon-banner{background:#EAF3DE;border:1px solid #8FAF6E;border-radius:8px;padding:7px 12px;font-size:12px;color:#3B6D11;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
-
-/* legend */
-.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1rem}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F8F6F1;color:#1a1a1a;min-height:100vh;padding:0 0 4rem}
+.topbar{background:#2D5016;color:#fff;padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.topbar-title{font-size:15px;font-weight:500;letter-spacing:.01em}
+.topbar-sub{font-size:12px;opacity:.7;margin-top:1px}
+.inv-btn{font-size:12px;padding:5px 12px;border:1px solid rgba(255,255,255,.35);border-radius:6px;background:transparent;color:#fff;cursor:pointer}
+.inv-btn:hover{background:rgba(255,255,255,.1)}
+.container{max-width:700px;margin:0 auto;padding:1.5rem 1rem}
+.summary-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.stat{background:#fff;border:1px solid #e2e0d9;border-radius:8px;padding:8px 14px;font-size:12px;color:#666;display:flex;align-items:center;gap:6px}
+.stat strong{color:#1a1a1a;font-weight:600}
+.tabs{display:flex;gap:0;margin-bottom:1.25rem;border-bottom:1.5px solid #ddd}
+.tab{font-size:13px;padding:8px 16px;cursor:pointer;color:#888;border:none;background:none;border-bottom:2.5px solid transparent;margin-bottom:-1.5px;font-family:inherit}
+.tab.active{color:#2D5016;border-bottom-color:#2D5016;font-weight:600}
+.section{display:none}.section.active{display:block}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:1rem}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#888}
-.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-
-/* cards */
-.cards{display:flex;flex-direction:column;gap:12px;margin-bottom:1.5rem}
-.card{background:#fff;border-radius:12px;border:1px solid #e5e1db;border-left:4px solid #ccc;padding:1rem 1.25rem;transition:opacity .2s}
-.card.cooked{opacity:.4}
-.card.urgent{border-left-color:#D85A30}
-.card.mid{border-left-color:#BA7517}
-.card.later{border-left-color:#3B6D11}
-.card.leftover{border-left-color:#185FA5}
-
-.day-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.06em}
-.meal-title{font-size:16px;font-weight:600;color:#1a1a1a;margin-top:3px;line-height:1.3}
-
-.badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:7px}
-.badge{font-size:11px;padding:3px 8px;border-radius:20px;font-weight:500}
-.badge-time{background:#EAF3DE;color:#3B6D11}
-.badge-protein{background:#E6F1FB;color:#185FA5}
-.badge-leftover{background:#FFF3CD;color:#856404}
-.badge-nocock{background:#FFF3CD;color:#856404}
-.badge-solo{background:#f2ede8;color:#888;border:1px solid #e0dbd4}
-.badge-couple{background:#EAF3DE;color:#3B6D11}
-
-.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
-.chip{font-size:11px;padding:3px 9px;border-radius:20px;background:#f5f2ec;border:1px solid #e5e1db;color:#555}
-
-.card-note{font-size:12px;color:#999;margin-top:8px;font-style:italic;line-height:1.5}
-
-.recipe-links{margin-top:9px;display:flex;gap:10px;flex-wrap:wrap}
-.recipe-link{font-size:12px;color:#C4873A;text-decoration:none}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.meal-grid{display:flex;flex-direction:column;gap:10px}
+.meal-card{background:#fff;border:1px solid #e2e0d9;border-radius:12px;padding:1rem 1.25rem;border-left:4px solid #ccc;transition:opacity .2s}
+.meal-card.spoil-high{border-left-color:#D85A30}
+.meal-card.spoil-mid{border-left-color:#BA7517}
+.meal-card.spoil-low{border-left-color:#3B6D11}
+.meal-card.spoil-leftovers{border-left-color:#aaa}
+.meal-card.cooked{opacity:.4}
+.day-label{font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.meal-name{font-size:15px;font-weight:600;color:#1a1a1a;line-height:1.35}
+.meal-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.badge{font-size:11px;padding:2px 9px;border-radius:20px}
+.badge-time{background:#E6F1FB;color:#185FA5}
+.badge-protein{background:#EAF3DE;color:#3B6D11}
+.badge-leftover{background:#f2f2f0;color:#888;border:1px solid #ddd}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:.6rem}
+.chip{font-size:11px;padding:2px 9px;background:#f5f4f0;border:1px solid #e2e0d9;border-radius:20px;color:#555}
+.batch-note{font-size:11px;color:#555;background:#f5f4f0;border:1px solid #ddd;border-radius:6px;padding:5px 10px;margin-top:.5rem;line-height:1.5}
+.batch-note.solo{background:#FFF8EE;border-color:#C4873A;color:#633806}
+.recipe-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:.5rem}
+.recipe-link{font-size:11px;color:#185FA5;text-decoration:none;display:flex;align-items:center;gap:3px}
 .recipe-link:hover{text-decoration:underline}
-.recipe-link::before{content:"→ "}
-
-.swap-result{margin-top:10px;padding:10px 12px;border-radius:8px;background:#E6F1FB;border:1px solid #b5d4f4;font-size:13px;color:#1a1a1a;line-height:1.6}
-
-.card-footer{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
-.serving-toggle{display:flex;border-radius:8px;border:1px solid #ccc;overflow:hidden}
-.serving-btn{font-size:11px;padding:4px 10px;background:none;border:none;cursor:pointer;color:#666}
-.serving-btn.active{background:#2D5016;color:#fff}
-.swap-btn{font-size:12px;padding:4px 10px;border-radius:8px;border:1px solid #ccc;background:none;color:#666;cursor:pointer}
-.swap-btn:hover{background:#f5f2ec}
-.swap-btn:disabled{opacity:.5;cursor:default}
-.cook-check{display:flex;align-items:center;gap:5px;font-size:12px;color:#999;margin-left:auto;cursor:pointer;user-select:none}
-.cook-check input{cursor:pointer;accent-color:#2D5016}
-
-/* panels */
-.panel{border-radius:12px;border:1px solid #e5e1db;overflow:hidden;margin-bottom:12px}
-.panel-header{display:flex;justify-content:space-between;align-items:center;padding:12px 1.25rem;background:#f5f2ec;cursor:pointer;font-size:14px;font-weight:600;color:#2D5016;user-select:none}
-.panel-header:hover{background:#eee9e1}
-.panel-chev{font-size:16px;color:#999}
-.panel-body{padding:1rem 1.25rem;background:#fff;border-top:1px solid #e5e1db}
-
-.prep-section{margin-bottom:1rem}
-.prep-section:last-child{margin-bottom:0}
-.prep-section h3{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
-.prep-item{font-size:13px;color:#1a1a1a;padding:5px 0;border-bottom:1px solid #f0ede8;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.prep-item:last-child{border-bottom:none}
-.prep-dot{width:6px;height:6px;border-radius:50%;background:#ccc;margin-top:7px;flex-shrink:0}
-.prep-item strong{font-weight:600}
-
-.thaw-item{font-size:13px;color:#1a1a1a;padding:6px 0;border-bottom:1px solid #f0ede8;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.thaw-item:last-child{border-bottom:none}
-.thaw-pending{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#FFF3CD;color:#856404;white-space:nowrap}
-.thaw-done{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;background:#EAF3DE;color:#3B6D11;white-space:nowrap}
-
-.shop-group{margin-bottom:1rem}
-.shop-group:last-of-type{margin-bottom:0}
-.shop-group h3{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
-.shop-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #f0ede8;font-size:13px;color:#1a1a1a;cursor:pointer;user-select:none}
+.card-actions{display:flex;align-items:center;gap:8px;margin-top:.85rem;flex-wrap:wrap}
+.serve-toggle{display:flex;border:1px solid #ccc;border-radius:6px;overflow:hidden}
+.serve-btn{font-size:11px;padding:4px 11px;background:none;border:none;cursor:pointer;color:#888;font-family:inherit}
+.serve-btn.active{background:#EAF3DE;color:#2D5016;font-weight:600}
+.swap-btn{font-size:11px;padding:4px 11px;border:1px solid #ccc;border-radius:6px;background:none;cursor:pointer;color:#555;font-family:inherit;display:flex;align-items:center;gap:4px}
+.swap-btn:hover{background:#f5f4f0}
+.swap-btn:disabled{opacity:.5;cursor:not-allowed}
+.cooked-wrap{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:12px;color:#888;cursor:pointer;user-select:none}
+.cooked-wrap input{accent-color:#2D5016;cursor:pointer}
+.swap-result{font-size:12px;color:#444;background:#f9f8f5;border:1px solid #ddd;border-radius:6px;padding:.6rem .85rem;margin-top:.5rem;line-height:1.6}
+.panel-block{margin-bottom:1.5rem}
+.panel-label{font-size:12px;font-weight:600;color:#2D5016;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.65rem}
+.tl-day{margin-bottom:.9rem}
+.tl-day-label{font-size:12px;font-weight:600;color:#555;margin-bottom:.3rem}
+.tl-item{font-size:13px;color:#333;padding:.3rem 0 .3rem .8rem;border-left:2.5px solid #ddd;line-height:1.5;margin-bottom:2px}
+.tl-item.thaw{border-left-color:#C4873A}
+.tl-item.prep{border-left-color:#2D5016}
+.tl-item.cook{border-left-color:#185FA5}
+.shop-group{margin-bottom:1.1rem}
+.shop-group-label{font-size:11px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.shop-item{display:flex;align-items:flex-start;gap:.5rem;font-size:13px;color:#333;padding:5px 0;cursor:pointer;line-height:1.4;border-bottom:1px solid #f0efe9}
 .shop-item:last-child{border-bottom:none}
-.shop-item input{cursor:pointer;accent-color:#2D5016;flex-shrink:0}
-.shop-item.checked{color:#aaa;text-decoration:line-through}
-.copy-btn{font-size:12px;padding:6px 14px;border-radius:8px;border:1px solid #ccc;background:#f5f2ec;color:#555;cursor:pointer;margin-top:12px}
-.copy-btn:hover{background:#eee9e1}
-
-/* modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;padding-top:60px;z-index:100}
-.modal{background:#fff;border-radius:12px;border:1px solid #e5e1db;padding:1.25rem;width:90%;max-width:380px;max-height:80vh;overflow-y:auto}
-.modal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.modal h2{font-size:16px;font-weight:600;color:#2D5016}
-.modal-close{font-size:22px;cursor:pointer;color:#999;line-height:1;background:none;border:none}
-.modal-close:hover{color:#1a1a1a}
-.inv-note{font-size:11px;color:#aaa;margin-bottom:10px}
-.inv-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f0ede8;font-size:13px}
-.inv-row:last-child{border-bottom:none}
-.inv-qty{color:#999;font-size:12px}
-
-/* no data state */
-.no-data{text-align:center;padding:3rem 1rem;color:#aaa}
-.no-data h2{font-size:18px;font-weight:600;color:#2D5016;margin-bottom:8px}
-.no-data p{font-size:14px;line-height:1.6}
-.no-data code{background:#f0ede8;padding:2px 6px;border-radius:4px;font-size:12px;color:#666}
+.shop-item input{accent-color:#2D5016;cursor:pointer;margin-top:2px;flex-shrink:0}
+.shop-item.checked span{color:#aaa;text-decoration:line-through}
+.qty{font-size:11px;color:#185FA5;font-weight:600;margin-left:5px}
+.copy-btn{font-size:12px;padding:6px 14px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#555;cursor:pointer;font-family:inherit;margin-top:.75rem;display:flex;align-items:center;gap:5px}
+.copy-btn:hover{background:#f5f4f0}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;padding:1.25rem 1.5rem;max-width:340px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.modal-hd{font-size:15px;font-weight:600;margin-bottom:.85rem;display:flex;justify-content:space-between;align-items:center;color:#1a1a1a}
+.modal-close{background:none;border:none;font-size:20px;cursor:pointer;color:#aaa;line-height:1;padding:0 2px}
+.prot-item{font-size:13px;padding:6px 0;border-bottom:1px solid #f0efe9;color:#333;display:flex;justify-content:space-between}
+.prot-item:last-child{border-bottom:none}
+.prot-qty{color:#999;font-size:12px}
+@media(max-width:480px){.topbar{flex-direction:column;align-items:flex-start;gap:.4rem}.container{padding:1rem .75rem}}
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     PASTE YOUR PLAN_DATA BLOCK HERE EACH WEEK.
-     Replace everything between the START and END markers.
-     ============================================================ -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">CSA Weekly Planner</div>
+    <div class="topbar-sub" id="week-sub">Week of — · —</div>
+  </div>
+  <button class="inv-btn" onclick="openModal()">&#9733; Protein inventory</button>
+</div>
 
-// === PLAN_DATA START ===
-const PLAN_DATA = null;
-// === PLAN_DATA END ===
+<div class="container">
+  <div class="summary-bar" id="summary-bar"></div>
 
-<!-- ============================================================
-     END OF EDITABLE SECTION — do not edit below this line
-     ============================================================ -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('meals',this)">Meal plan</button>
+    <button class="tab" onclick="switchTab('prep',this)">Prep &amp; thaw</button>
+    <button class="tab" onclick="switchTab('shop',this)">Shopping list</button>
+  </div>
 
-<div class="planner" id="root"></div>
-
-<div class="modal-overlay" id="invModal" style="display:none" onclick="if(event.target===this)closeInv()">
-  <div class="modal">
-    <div class="modal-top">
-      <h2>&#10052; Freezer inventory</h2>
-      <button class="modal-close" onclick="closeInv()">×</button>
+  <div id="meals" class="section active">
+    <div class="legend">
+      <div class="legend-item"><div class="dot" style="background:#D85A30"></div>Use first (1–3 days)</div>
+      <div class="legend-item"><div class="dot" style="background:#BA7517"></div>Use mid-week (4–5 days)</div>
+      <div class="legend-item"><div class="dot" style="background:#3B6D11"></div>Use anytime (5–7 days)</div>
     </div>
-    <div class="inv-note" id="invNote"></div>
-    <div id="invList"></div>
+    <div class="meal-grid" id="meal-grid"></div>
+  </div>
+
+  <div id="prep" class="section">
+    <div class="panel-block">
+      <div class="panel-label">Weekend prep (before Monday)</div>
+      <div id="weekend-prep"></div>
+    </div>
+    <div class="panel-block">
+      <div class="panel-label">Night-by-night timeline</div>
+      <div id="timeline-content"></div>
+    </div>
+  </div>
+
+  <div id="shop" class="section">
+    <div id="shop-content"></div>
+    <button class="copy-btn" onclick="copyList()">&#128203; Copy list</button>
+  </div>
+</div>
+
+<div class="overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-hd">Protein inventory <button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
+    <div id="inventory-list"></div>
   </div>
 </div>
 
 <script>
-// ── localStorage helpers ──────────────────────────────────────────────────────
-const LS_PREFIX = 'csa-planner-';
-const weekKey = () => PLAN_DATA ? PLAN_DATA.weekLabel.replace(/\s+/g,'-') : 'unknown';
-const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(LS_PREFIX + weekKey() + '-' + k)); } catch { return null; } };
-const lsSet = (k, v) => { try { localStorage.setItem(LS_PREFIX + weekKey() + '-' + k, JSON.stringify(v)); } catch {} };
+/* ============================================================
+   PLAN DATA — Claude replaces everything inside PLAN_DATA
+   each Friday. Do not edit anything outside this block
+   unless you know what you're doing.
+   ============================================================ */
+const PLAN_DATA = {
+  weekLabel: "June 23 – 27, 2025",
+  farmLabel: "Flocktown Farms × Omaha Steaks",
 
-// ── state ─────────────────────────────────────────────────────────────────────
-let servings = [];
-let cooked = [];
-let shopChecked = [];
-let swapResults = [];
+  inventory: [
+    { name: "Filet mignon (6 oz)", qty: "4 portions" },
+    { name: "Chicken breast", qty: "6 portions" },
+    { name: "Ribeye steak", qty: "2 portions" },
+    { name: "Ground beef (80/20)", qty: "3 lbs" },
+    { name: "Pork chops", qty: "4 portions" },
+    { name: "Salmon fillet", qty: "3 portions" },
+    { name: "Italian sausage", qty: "2 lbs" }
+  ],
 
-function initState() {
-  if (!PLAN_DATA) return;
-  const n = PLAN_DATA.meals.length;
-  servings    = lsGet('servings')    || PLAN_DATA.meals.map(m => m.servings || 2);
-  cooked      = lsGet('cooked')      || Array(n).fill(false);
-  shopChecked = lsGet('shopChecked') || {};
-  swapResults = Array(n).fill(null);
-  // ensure arrays are right length (handles week transitions)
-  while (servings.length < n) servings.push(2);
-  while (cooked.length < n)   cooked.push(false);
-}
-
-// ── render ────────────────────────────────────────────────────────────────────
-function render() {
-  const root = document.getElementById('root');
-
-  if (!PLAN_DATA) {
-    root.innerHTML = `
-      <div class="no-data">
-        <h2>No plan loaded yet</h2>
-        <p>Each Friday, run the CSA Planner skill in Claude.<br>
-        Copy the <code>PLAN_DATA</code> block and paste it into<br>
-        <code>index.html</code> via the GitHub editor, then commit.</p>
-      </div>`;
-    return;
-  }
-
-  let html = `
-    <div class="header">
-      <div class="header-text">
-        <h1>${esc(PLAN_DATA.weekLabel)}</h1>
-        <p>${esc(PLAN_DATA.subtitle)}</p>
-      </div>
-      <button class="inv-btn" onclick="openInv()">&#10052; Freezer inventory</button>
-    </div>`;
-
-  if (PLAN_DATA.jonNote) {
-    html += `<div class="jon-banner">&#9992; ${esc(PLAN_DATA.jonNote)}</div>`;
-  }
-
-  html += `
-    <div class="legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#D85A30"></div>Use first (2–3 days)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#BA7517"></div>Mid-week (4–5 days)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#3B6D11"></div>Flexible / any night</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#185FA5"></div>Leftovers</div>
-    </div>
-    <div class="cards">`;
-
-  PLAN_DATA.meals.forEach((m, i) => {
-    const isLO = m.urgency === 'leftover';
-    const srv  = servings[i] || 2;
-
-    const timeBadge = m.cook
-      ? `<span class="badge badge-time">&#128336; ${esc(m.cook)}</span>`
-      : `<span class="badge badge-nocock">no cook</span>`;
-
-    const protBadge = isLO
-      ? `<span class="badge badge-leftover">${esc(m.protein)}</span>`
-      : `<span class="badge badge-protein">${esc(m.protein)}</span>`;
-
-    const srvBadge = srv === 1
-      ? `<span class="badge badge-solo">solo night</span>`
-      : `<span class="badge badge-couple">2 people ♡</span>`;
-
-    const chips = (m.ingredients || []).map(x => `<div class="chip">${esc(x)}</div>`).join('');
-
-    const links = (m.recipes || []).map(r =>
-      `<a class="recipe-link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a>`
-    ).join('');
-
-    const swapHTML = swapResults[i]
-      ? `<div class="swap-result">${esc(swapResults[i])}</div>` : '';
-
-    const swapBtn = isLO ? '' :
-      `<button class="swap-btn" id="swp${i}" onclick="doSwap(${i})">&#8635; Swap meal</button>`;
-
-    html += `
-      <div class="card ${esc(m.urgency)}${cooked[i] ? ' cooked' : ''}">
-        <div class="day-label">${esc(m.day)} · ${esc(m.date)}</div>
-        <div class="meal-title">${esc(m.title)}</div>
-        <div class="badges">${timeBadge}${protBadge}${srvBadge}</div>
-        ${chips ? `<div class="chips">${chips}</div>` : ''}
-        ${m.note ? `<div class="card-note">${esc(m.note)}</div>` : ''}
-        ${links ? `<div class="recipe-links">${links}</div>` : ''}
-        ${swapHTML}
-        <div class="card-footer">
-          <div class="serving-toggle">
-            <button class="serving-btn${srv===1?' active':''}" onclick="setSrv(${i},1)">1 person</button>
-            <button class="serving-btn${srv===2?' active':''}" onclick="setSrv(${i},2)">2 people</button>
-          </div>
-          ${swapBtn}
-          <label class="cook-check">
-            <input type="checkbox" ${cooked[i]?'checked':''} onchange="togCooked(${i})"> &#10003; cooked
-          </label>
-        </div>
-      </div>`;
-  });
-
-  html += `</div>`; // end .cards
-
-  // ── prep timeline panel ──
-  const pt = PLAN_DATA.prepTimeline;
-  let prepHTML = '';
-  if (pt) {
-    if (pt.arrival && pt.arrival.length) {
-      prepHTML += `<div class="prep-section"><h3>When the box arrives</h3>`;
-      pt.arrival.forEach(t => {
-        prepHTML += `<div class="prep-item"><div class="prep-dot"></div>${esc(t)}</div>`;
-      });
-      prepHTML += `</div>`;
+  meals: [
+    {
+      day: "Monday", date: "Jun 23", spoil: "high",
+      name: "Kimchi fried rice with baby bok choy",
+      cook: "20 min", protein: "Fried egg (no thaw needed)",
+      ingredients: ["Kimchi", "Baby bok choy", "Green onions", "Jasmine rice", "Gochujang", "Sesame oil"],
+      links: [
+        { label: "Maangchi classic", url: "https://www.maangchi.com/recipe/kimchi-bokkeumbap" },
+        { label: "CJ Eats", url: "https://cjeatsrecipes.com/kimchi-fried-rice-2/" }
+      ],
+      batchNote: {
+        two: "Make a double batch — saves Tuesday night entirely",
+        one: "Cooking for 1 tonight: still make a little extra for Tuesday leftovers"
+      },
+      isBatchNight: true
+    },
+    {
+      day: "Tuesday", date: "Jun 24", spoil: "leftovers",
+      name: "Leftovers: kimchi fried rice — prep night",
+      cook: null, protein: null,
+      ingredients: [],
+      links: [],
+      batchNote: {
+        two: "Reheating Monday's full batch (2 portions)",
+        one: "Reheating Monday's leftover portion (1 portion)"
+      },
+      isLeftoverNight: true
+    },
+    {
+      day: "Wednesday", date: "Jun 25", spoil: "high",
+      name: "Tex-Mex chicken & yellow squash skillet",
+      cook: "30 min", protein: "Chicken breast (thaw Tue night)",
+      ingredients: ["Yellow squash", "Orange bell pepper", "Jalapeño", "Cilantro", "Green onions", "Black beans", "Corn", "Canned tomatoes"],
+      links: [
+        { label: "iFoodReal", url: "https://ifoodreal.com/chicken-and-zucchini/" }
+      ],
+      batchNote: {
+        two: "Cook full skillet — great as Wed dinner + Thu lunch",
+        one: "Halve the chicken portion; squash & veg scale down easily"
+      }
+    },
+    {
+      day: "Thursday", date: "Jun 26", spoil: "mid",
+      name: "Savoy cabbage & kimchi stir-fry noodles",
+      cook: "25 min", protein: "Vegetarian",
+      ingredients: ["Savoy cabbage", "Kimchi", "Green onions", "Rice noodles", "Gochujang", "Soy sauce", "Sesame oil"],
+      links: [
+        { label: "Crunch Time Kitchen", url: "https://www.crunchtimekitchen.com/kimchi-stir-fry/" }
+      ],
+      batchNote: {
+        two: "Full recipe makes 2 generous bowls",
+        one: "Use half the noodles and cabbage — kimchi flavor carries either way"
+      }
+    },
+    {
+      day: "Friday", date: "Jun 27", spoil: "low",
+      name: "Snow pea & arugula salad + grilled steak",
+      cook: "20 min", protein: "Filet mignon (thaw Thu night)",
+      ingredients: ["Snow peas", "Arugula", "Mixed greens", "Cucumber", "Greek yogurt dressing", "Parsley", "Lemon"],
+      links: [
+        { label: "Minimalist Baker", url: "https://minimalistbaker.com/snap-pea-salad-lemon-vinaigrette/" },
+        { label: "Inspired Taste (cucumber side)", url: "https://www.inspiredtaste.net/37192/creamy-cucumber-salad/" }
+      ],
+      batchNote: {
+        two: "Pull 2 filets — grill together, slice and share",
+        one: "1 filet only — keep the second frozen for another week"
+      }
     }
-    if (pt.nightOf && Object.keys(pt.nightOf).length) {
-      prepHTML += `<div class="prep-section"><h3>Night-of notes</h3>`;
-      Object.entries(pt.nightOf).forEach(([day, note]) => {
-        prepHTML += `<div class="prep-item"><div class="prep-dot"></div><strong>${esc(day)}:</strong>&nbsp;${esc(note)}</div>`;
-      });
-      prepHTML += `</div>`;
+  ],
+
+  weekendPrep: [
+    "Spin dry mixed greens & arugula, wrap in paper towel, store in bag — do not wash yet",
+    "Store herbs (parsley, cilantro) stems-in-water in fridge door; basil at room temp",
+    "Wash & dry bok choy, separate leaves if desired, store sealed",
+    "Keep cucumbers, squash, bell pepper whole and unwashed until night-of",
+    "Savoy cabbage: leave head whole — cut and wrap tightly when ready to use"
+  ],
+
+  timeline: [
+    {
+      day: "Sunday night",
+      items: [{ type: "thaw", text: "No thaw needed — Monday uses eggs (no freezer protein)" }]
+    },
+    {
+      day: "Monday night",
+      items: [
+        { type: "thaw", text: "Pull chicken breast from freezer for Wednesday" },
+        { type: "cook", text: "Make a full double batch of fried rice — leave half for Tuesday" }
+      ]
+    },
+    {
+      day: "Tuesday night",
+      items: [
+        { type: "prep", text: "Wash & roughly chop savoy cabbage, store wrapped" },
+        { type: "prep", text: "Prep snow peas (string if needed), refrigerate dry" },
+        { type: "cook", text: "Reheat Monday's rice — no cooking required" }
+      ]
+    },
+    {
+      day: "Wednesday night",
+      items: [
+        { type: "thaw", text: "Pull filet mignon from freezer for Friday" },
+        { type: "cook", text: "Night-of: slice squash & bell pepper, chop cilantro" }
+      ]
+    },
+    {
+      day: "Thursday night",
+      items: [
+        { type: "thaw", text: "Filet already thawing — confirm Friday plan; if solo, keep 2nd filet frozen" },
+        { type: "cook", text: "Night-of: shred cabbage, chop kimchi & scallions" }
+      ]
     }
-    if (pt.thawSchedule && pt.thawSchedule.length) {
-      prepHTML += `<div class="prep-section"><h3>Thaw schedule</h3>`;
-      pt.thawSchedule.forEach(t => {
-        const badge = t.status === 'done'
-          ? `<span class="thaw-done">&#10003; ${esc(t.status === 'done' ? 'In fridge' : '')}</span>`
-          : `<span class="thaw-pending">${esc(t.instruction)}</span>`;
-        prepHTML += `<div class="thaw-item"><span>${esc(t.protein)}</span>${badge}</div>`;
-      });
-      prepHTML += `</div>`;
+  ],
+
+  shop: [
+    {
+      group: "Dairy & eggs",
+      items: [
+        { text: "Eggs", qty: { two: "1 dozen", one: "half dozen" }, sensitive: true },
+        { text: "Greek yogurt, plain", qty: { two: "1 cup", one: "1 cup" }, sensitive: false }
+      ]
+    },
+    {
+      group: "Pantry & sauces",
+      items: [
+        { text: "Gochujang (if not stocked)", qty: { two: null, one: null }, sensitive: false },
+        { text: "Soy sauce, low sodium", qty: { two: null, one: null }, sensitive: false },
+        { text: "Rice noodles", qty: { two: "1 pkg (8 oz)", one: "half pkg" }, sensitive: true },
+        { text: "Sesame oil", qty: { two: null, one: null }, sensitive: false },
+        { text: "Canned black beans", qty: { two: "1 can (15 oz)", one: "1 can (use half)" }, sensitive: false },
+        { text: "Canned diced tomatoes", qty: { two: "1 can (14 oz)", one: "1 can (use half)" }, sensitive: false },
+        { text: "Canned or frozen corn", qty: { two: "1 cup", one: "1/2 cup" }, sensitive: true }
+      ]
+    },
+    {
+      group: "Bread & snacks",
+      items: [
+        { text: "Your usual — not dictated by this plan", qty: { two: null, one: null }, sensitive: false }
+      ]
     }
-  }
+  ]
+};
+/* ============================================================
+   END OF PLAN DATA — do not edit below this line
+   ============================================================ */
 
-  html += `
-    <div class="panel">
-      <div class="panel-header" onclick="togPanel('prepBody','prepChev')">
-        <span>&#128197; Prep timeline &amp; thaw schedule</span>
-        <span class="panel-chev" id="prepChev">&#8964;</span>
-      </div>
-      <div id="prepBody" style="display:none">
-        <div class="panel-body">${prepHTML || '<p style="font-size:13px;color:#aaa">No prep data.</p>'}</div>
-      </div>
-    </div>`;
+const STORAGE_KEY = "csa_planner_state";
 
-  // ── shopping list panel ──
-  const sl = PLAN_DATA.shoppingList || {};
-  let shopHTML = '';
-  let allShopItems = [];
-  Object.entries(sl).forEach(([cat, items]) => {
-    if (!items || !items.length) return;
-    shopHTML += `<div class="shop-group"><h3>${esc(cat)}</h3>`;
-    items.forEach(item => {
-      const idx = allShopItems.length;
-      const checked = shopChecked[idx] || false;
-      shopHTML += `<label class="shop-item${checked?' checked':''}" id="si${idx}" onclick="togShop(${idx})">
-        <input type="checkbox" ${checked?'checked':''} onclick="event.stopPropagation();togShop(${idx})"> ${esc(item)}
-      </label>`;
-      allShopItems.push(item);
-    });
-    shopHTML += `</div>`;
-  });
-
-  const copyText = Object.entries(sl).map(([cat, items]) =>
-    items && items.length ? `${cat.toUpperCase()}\n${items.map(i=>`- ${i}`).join('\n')}` : ''
-  ).filter(Boolean).join('\n\n');
-
-  html += `
-    <div class="panel">
-      <div class="panel-header" onclick="togPanel('shopBody','shopChev')">
-        <span>&#128722; Gap shopping list</span>
-        <span class="panel-chev" id="shopChev">&#8964;</span>
-      </div>
-      <div id="shopBody" style="display:none">
-        <div class="panel-body">
-          ${shopHTML || '<p style="font-size:13px;color:#aaa">No shopping gaps this week.</p>'}
-          <button class="copy-btn" onclick="copyShop(${JSON.stringify(copyText).replace(/</g,'&lt;')})">&#10064; Copy list</button>
-        </div>
-      </div>
-    </div>`;
-
-  root.innerHTML = html;
-}
-
-// ── interactions ──────────────────────────────────────────────────────────────
-function setSrv(i, n) {
-  servings[i] = n;
-  lsSet('servings', servings);
-  render();
-}
-
-function togCooked(i) {
-  cooked[i] = !cooked[i];
-  lsSet('cooked', cooked);
-  render();
-}
-
-function togShop(idx) {
-  shopChecked[idx] = !shopChecked[idx];
-  lsSet('shopChecked', shopChecked);
-  render();
-}
-
-function togPanel(bodyId, chevId) {
-  const b = document.getElementById(bodyId);
-  const c = document.getElementById(chevId);
-  if (!b) return;
-  const open = b.style.display !== 'none';
-  b.style.display = open ? 'none' : 'block';
-  c.innerHTML = open ? '&#8964;' : '&#8963;';
-}
-
-async function doSwap(i) {
-  const m = PLAN_DATA.meals[i];
-  const btn = document.getElementById(`swp${i}`);
-  if (!btn) return;
-  btn.disabled = true;
-  btn.textContent = 'Thinking…';
-
-  const srv = servings[i] || 2;
-  const prompt = `I'm planning a weeknight dinner for ${srv === 1 ? '1 person (solo)' : '2 people'}. Night: ${m.day}. My CSA this week has: ${PLAN_DATA.csaInventory}. I need one alternative to "${m.title}". Constraints: no shellfish, no olives, no regular/English peas (snow peas ok). Cook time under 35 min. Bold globally-influenced flavors (Asian, Mexican/Latin, or American comfort). Suggest ONE alternative: meal name, key CSA ingredients, protein (or vegetarian), and one real recipe URL. Format: **[Meal name]** — [one sentence description]. Uses: [CSA items]. Protein: [protein]. Recipe: [URL]`;
-
+function loadState() {
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    if (s.weekLabel !== PLAN_DATA.weekLabel) return null;
+    return s;
+  } catch(e) { return null; }
+}
+
+function saveState() {
+  const s = {
+    weekLabel: PLAN_DATA.weekLabel,
+    servings, cooked, shopChecked
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
+
+const saved = loadState();
+let servings = saved ? saved.servings : PLAN_DATA.meals.map(() => 2);
+let cooked = saved ? saved.cooked : PLAN_DATA.meals.map(() => false);
+let shopChecked = saved ? saved.shopChecked : {};
+
+function nightsFor(n) { return servings.filter((s,i) => !PLAN_DATA.meals[i].isLeftoverNight && s===n).length; }
+function cookNights() { return PLAN_DATA.meals.filter(m => !m.isLeftoverNight).length; }
+function dominantServing() {
+  const c = {1:0, 2:0};
+  servings.forEach((s,i) => { if (!PLAN_DATA.meals[i].isLeftoverNight) c[s]++; });
+  return c[1] > c[2] ? 1 : 2;
+}
+
+function renderAll() {
+  document.getElementById("week-sub").textContent = `Week of ${PLAN_DATA.weekLabel} · ${PLAN_DATA.farmLabel}`;
+  renderSummary();
+  renderMeals();
+  renderWeekendPrep();
+  renderTimeline();
+  renderShop();
+}
+
+function renderSummary() {
+  const f2 = nightsFor(2), f1 = nightsFor(1), cn = cookNights();
+  document.getElementById("summary-bar").innerHTML = `
+    <div class="stat"><strong>${f2}</strong> night${f2!==1?"s":""} for 2</div>
+    <div class="stat"><strong>${f1}</strong> night${f1!==1?"s":""} for 1</div>
+    <div class="stat"><strong>${cn}</strong> cook nights this week</div>`;
+}
+
+function renderMeals() {
+  document.getElementById("meal-grid").innerHTML = PLAN_DATA.meals.map((m,i) => {
+    const srv = servings[i];
+    const isLeftover = !!m.isLeftoverNight;
+    const chipsHtml = m.ingredients.length
+      ? `<div class="chips">${m.ingredients.map(c=>`<span class="chip">${c}</span>`).join("")}</div>` : "";
+    const linksHtml = m.links.length
+      ? `<div class="recipe-links">${m.links.map(l=>`<a class="recipe-link" href="${l.url}" target="_blank">&#8599; ${l.label}</a>`).join("")}</div>` : "";
+    const note = m.batchNote ? m.batchNote[srv===1?"one":"two"] : null;
+    const noteHtml = note ? `<div class="batch-note${srv===1?" solo":""}">${srv===1?"&#x1F464; ":""}${note}</div>` : "";
+    return `<div class="meal-card spoil-${m.spoil}${cooked[i]?" cooked":""}" id="card-${i}">
+      <div class="day-label">${m.day} · ${m.date}</div>
+      <div class="meal-name">${m.name}</div>
+      <div class="meal-meta">
+        ${m.cook ? `<span class="badge badge-time">${m.cook}</span>` : `<span class="badge badge-leftover">Leftovers / prep night</span>`}
+        ${m.protein ? `<span class="badge badge-protein">${m.protein}</span>` : ""}
+      </div>
+      ${chipsHtml}
+      ${noteHtml}
+      ${linksHtml}
+      <div class="card-actions">
+        ${!isLeftover ? `<div class="serve-toggle">
+          <button class="serve-btn${srv===1?" active":""}" onclick="setServing(${i},1)">1 person</button>
+          <button class="serve-btn${srv===2?" active":""}" onclick="setServing(${i},2)">2 people</button>
+        </div>` : ""}
+        ${!isLeftover ? `<button class="swap-btn" id="swap-${i}" onclick="swapMeal(${i})">&#8635; Swap meal</button>` : ""}
+        <label class="cooked-wrap">
+          <input type="checkbox" ${cooked[i]?"checked":""} onchange="toggleCooked(${i},this.checked)"> Cooked
+        </label>
+      </div>
+      <div id="result-${i}"></div>
+    </div>`;
+  }).join("");
+}
+
+function setServing(i, n) {
+  servings[i] = n;
+  saveState();
+  renderSummary();
+  renderMeals();
+  renderShop();
+}
+
+function toggleCooked(i, val) {
+  cooked[i] = val;
+  saveState();
+  const card = document.getElementById(`card-${i}`);
+  if (val) card.classList.add("cooked"); else card.classList.remove("cooked");
+}
+
+async function swapMeal(idx) {
+  const btn = document.getElementById(`swap-${idx}`);
+  const resultDiv = document.getElementById(`result-${idx}`);
+  btn.disabled = true;
+  btn.textContent = "Finding alternative...";
+  resultDiv.innerHTML = "";
+  const m = PLAN_DATA.meals[idx];
+  const srv = servings[idx];
+  const allIngredients = PLAN_DATA.meals.flatMap(x => x.ingredients).filter((v,i,a)=>a.indexOf(v)===i);
+  const prompt = `I'm meal planning for ${m.day} dinner for ${srv} person${srv>1?"s":""}. Current meal: "${m.name}". I want one alternative.
+Available CSA produce: ${allIngredients.join(", ")}.
+Available freezer proteins: ${PLAN_DATA.inventory.map(p=>p.name).join(", ")}.
+Constraints: under 30 min, no shellfish, no regular peas, no olives. Bold globally-influenced flavors. Cooking for ${srv} person${srv>1?"s":""}.
+Reply with: meal name, 3-5 key ingredients, cook time, one recipe URL. Max 80 words.`;
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1000, messages: [{ role: "user", content: prompt }] })
     });
     const data = await res.json();
-    swapResults[i] = data.content?.find(b => b.type === 'text')?.text || 'No suggestion returned.';
-  } catch (e) {
-    swapResults[i] = 'Could not reach the API. Check your connection and try again.';
+    const text = data.content?.find(b => b.type==="text")?.text || "No suggestion returned.";
+    resultDiv.innerHTML = `<div class="swap-result"><strong>Suggested swap:</strong><br>${text.replace(/\n/g,"<br>")}</div>`;
+  } catch(e) {
+    resultDiv.innerHTML = `<div class="swap-result" style="color:#c0392b">Could not load suggestion. Check your connection.</div>`;
   }
-  render();
+  btn.disabled = false;
+  btn.textContent = "↻ Swap meal";
 }
 
-function openInv() {
-  if (!PLAN_DATA) return;
-  document.getElementById('invNote').textContent = 'After this week\'s commitments';
-  const list = document.getElementById('invList');
-  list.innerHTML = (PLAN_DATA.freezerInventory || []).map(item =>
-    `<div class="inv-row"><span>${esc(item.name)}</span><span class="inv-qty">${esc(item.qty)}</span></div>`
-  ).join('') || '<p style="font-size:13px;color:#aaa">No inventory data.</p>';
-  document.getElementById('invModal').style.display = 'flex';
+function renderWeekendPrep() {
+  document.getElementById("weekend-prep").innerHTML = PLAN_DATA.weekendPrep
+    .map(t => `<div class="tl-item prep">${t}</div>`).join("");
 }
 
-function closeInv() {
-  document.getElementById('invModal').style.display = 'none';
+function renderTimeline() {
+  document.getElementById("timeline-content").innerHTML = PLAN_DATA.timeline.map(day => `
+    <div class="tl-day">
+      <div class="tl-day-label">${day.day}</div>
+      ${day.items.map(it => `<div class="tl-item ${it.type}">${it.text}</div>`).join("")}
+    </div>`).join("");
 }
 
-function copyShop(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = event.target.closest('button');
-    const orig = btn.innerHTML;
-    btn.innerHTML = '&#10003; Copied!';
-    setTimeout(() => btn.innerHTML = orig, 2000);
+function renderShop() {
+  const mode = dominantServing();
+  let html = "";
+  PLAN_DATA.shop.forEach(group => {
+    html += `<div class="shop-group"><div class="shop-group-label">${group.group}</div>`;
+    html += group.items.map((it, i) => {
+      const key = `${group.group}-${i}`;
+      const q = it.sensitive && it.qty[mode===1?"one":"two"];
+      const qHtml = q ? `<span class="qty">${q}</span>` : "";
+      return `<div class="shop-item${shopChecked[key]?" checked":""}" onclick="toggleShop('${key}',this)">
+        <input type="checkbox" ${shopChecked[key]?"checked":""} onclick="event.stopPropagation();toggleShop('${key}',this.closest('.shop-item'))">
+        <span>${it.text}${qHtml}</span>
+      </div>`;
+    }).join("");
+    html += `</div>`;
+  });
+  document.getElementById("shop-content").innerHTML = html;
+}
+
+function toggleShop(key, el) {
+  shopChecked[key] = !shopChecked[key];
+  if (shopChecked[key]) el.classList.add("checked"); else el.classList.remove("checked");
+  el.querySelector("input").checked = shopChecked[key];
+  saveState();
+}
+
+function copyList() {
+  const mode = dominantServing();
+  let txt = "Gap shopping list\n\n";
+  PLAN_DATA.shop.forEach(group => {
+    txt += `${group.group}:\n`;
+    txt += group.items.map(it => {
+      const q = it.sensitive && it.qty[mode===1?"one":"two"];
+      return `- ${it.text}${q ? " — " + q : ""}`;
+    }).join("\n");
+    txt += "\n\n";
+  });
+  navigator.clipboard.writeText(txt.trim()).then(() => {
+    const btn = document.querySelector(".copy-btn");
+    btn.textContent = "Copied!";
+    setTimeout(() => btn.textContent = "📋 Copy list", 2000);
   });
 }
 
-function esc(str) {
-  if (str == null) return '';
-  return String(str)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+function openModal() {
+  document.getElementById("inventory-list").innerHTML = PLAN_DATA.inventory
+    .map(p => `<div class="prot-item"><span>${p.name}</span><span class="prot-qty">${p.qty}</span></div>`).join("");
+  document.getElementById("modal").classList.add("open");
+}
+function closeModal() { document.getElementById("modal").classList.remove("open"); }
+function closeModalOutside(e) { if (e.target.id==="modal") closeModal(); }
+
+function switchTab(id, btn) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
 }
 
-// ── boot ──────────────────────────────────────────────────────────────────────
-initState();
-render();
+renderAll();
 </script>
-
 </body>
 </html>
