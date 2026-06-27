@@ -469,8 +469,12 @@ function render() {
     if (pt.arrival && pt.arrival.length) {
       prepHTML += `<div class="prep-section"><h3>When the box arrives</h3>`;
       pt.arrival.forEach(t => {
-        const emoji = ingredientEmoji(t.split(':')[0]);
-        prepHTML += `<div class="prep-item"><span class="prep-emoji">${emoji}</span>${esc(t)}</div>`;
+        const parts = t.split(':');
+        const emoji = ingredientEmoji(parts[0]);
+        const body = parts.length > 1
+          ? `<strong>${esc(parts[0])}:</strong>${esc(parts.slice(1).join(':'))}`
+          : esc(t);
+        prepHTML += `<div class="prep-item"><span class="prep-emoji">${emoji}</span>${body}</div>`;
       });
       prepHTML += `</div>`;
     }
