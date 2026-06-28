@@ -137,10 +137,55 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 // ============================================================
 
 // === PLAN_DATA START ===
-// === PLAN_DATA START ===
 const PLAN_DATA = {
   weekLabel: "Week of Jun 30 – Jul 5, 2026",
   jonNote: "Jon away Tue–Thu night · Home Friday evening · Welcome home dinner Friday",
+  weekendRecipes: [
+    {
+      day: "Saturday (tonight)",
+      title: "Kimchi fried rice with bok choy & green onion",
+      note: "Uses kimchi, baby bok choy, green onions, jalapeño (optional heat). Works best with day-old rice.",
+      recipes: [
+        { label: "Maangchi's classic kimchi fried rice", url: "https://maangchi.com/recipe/kimchi-bokkeumbap" },
+        { label: "CJ Eats kimchi fried rice (20 min)", url: "https://cjeatsrecipes.com/kimchi-fried-rice-2" }
+      ]
+    },
+    {
+      day: "Sunday (tomorrow)",
+      title: "Tex-Mex chicken & yellow squash skillet",
+      note: "Uses yellow summer squash, orange bell pepper, jalapeño, cilantro, green onions. Protein: chicken breasts (thawing). One pan, ~30 min.",
+      recipes: [
+        { label: "iFoodReal Chicken and Zucchini skillet", url: "https://ifoodreal.com/chicken-and-zucchini" }
+      ]
+    },
+    {
+      day: "Monday",
+      title: "Kimchi & savoy cabbage stir-fry with noodles",
+      note: "Uses kimchi, savoy cabbage, green onions, bok choy. Protein: kielbasa (thawing).",
+      recipes: [
+        { label: "Crunch Time Kitchen kimchi stir-fry", url: "https://crunchtimekitchen.com/kimchi-stir-fry" },
+        { label: "Feasting at Home cabbage stir-fry", url: "https://feastingathome.com/cabbage-stir-fry" }
+      ]
+    },
+    {
+      day: "Side option",
+      title: "Tzatziki cucumber salad",
+      note: "10-minute fridge raid — cucumbers, Greek yogurt, parsley or basil in place of dill.",
+      recipes: [
+        { label: "Inspired Taste tzatziki cucumber salad", url: "https://www.inspiredtaste.net" },
+        { label: "Live Eat Learn tzatziki cucumber salad (10 min)", url: "https://liveeatlearn.com/tzatziki-cucumber-salad" }
+      ]
+    },
+    {
+      day: "Side option",
+      title: "Snow pea & arugula salad with savoy cabbage",
+      note: "Crisp, herbaceous — works as a starter or alongside any of the above.",
+      recipes: [
+        { label: "I Heart Vegetables snow pea salad", url: "https://iheartvegetables.com/snow-pea-salad" },
+        { label: "Minimalist Baker snap pea salad", url: "https://minimalistbaker.com/snap-pea-salad-lemon-vinaigrette" }
+      ]
+    }
+  ],
   csaInventory: "asian greens mix, baby fennel x2, cone cabbage, euro cucumbers x2, fresh garlic x2 heads, scallions x2 bunches, lacinato kale, orange carrots, red leaf lettuce, zucchini/squash x2, bigoli pasta 1lb, crushed tomatoes 28oz, coconut curry chickpeas 15oz, sardines in spiced olive oil",
   freezerInventory: [
     { name: "Ground beef, 1 lb pkgs", qty: "3 remaining" },
@@ -472,6 +517,28 @@ function render() {
 
   html += `</div>
     <div class="sidebar">`;
+
+  // ── weekend recipes panel ──
+  if (PLAN_DATA.weekendRecipes && PLAN_DATA.weekendRecipes.length) {
+    let wkHTML = '';
+    PLAN_DATA.weekendRecipes.forEach(w => {
+      wkHTML += `<div class="prep-section">
+        <h3>${esc(w.day)} — ${esc(w.title)}</h3>
+        ${w.note ? `<p style="font-size:12px;color:#A3AEC0;margin-bottom:6px;line-height:1.5">${esc(w.note)}</p>` : ''}
+        ${(w.recipes || []).map(r => `<div class="single-recipe"><a class="recipe-link" href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.label)}</a></div>`).join('')}
+      </div>`;
+    });
+    html += `
+    <div class="panel">
+      <div class="panel-header" onclick="togPanel('wkBody','wkChev')">
+        <span>&#127860; Weekend recipes</span>
+        <span class="panel-chev" id="wkChev">&#8964;</span>
+      </div>
+      <div id="wkBody" style="display:block">
+        <div class="panel-body">${wkHTML}</div>
+      </div>
+    </div>`;
+  }
 
   // ── prep timeline panel ──
   const pt = PLAN_DATA.prepTimeline;
